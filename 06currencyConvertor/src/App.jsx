@@ -44,10 +44,10 @@ import { useState } from 'react'
                               label="From"
                               amount={amount}
                               currencyOptions={options}
-                              onCurrencyChange = {(currency)=>{
-                              setAmount(amount)
-                              }}
-                              selectCurrency={(from)}
+                            // 
+                            onCurrencyChange={(currency) => setFrom(currency)}
+
+                              selectCurrency={from}
                               onAmountChange={(amount => setAmount(amount))}
                           />
                       </div>
@@ -71,7 +71,7 @@ import { useState } from 'react'
                                 
                               }}
                               amountDisable
-                              selectCurrency={(to)}
+                              selectCurrency={to}
                           />
                       </div>
                       <button type="submit" className="w-full bg-blue-600 text-white px-4 py-3 rounded-lg">
