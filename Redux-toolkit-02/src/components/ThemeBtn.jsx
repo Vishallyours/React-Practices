@@ -1,25 +1,50 @@
-import React from 'react'
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { toggleTheme } from '../features/theme/themeSlice'
+import * as motion from "motion/react-client"
+import { useState } from "react"
 
 function ThemeBtn() {
 
-    const dispatch = useDispatch();
-    const isDarkMode = useSelector((state) => state.theme.isDarkMode)
+const sun =  "/sun-black.png"
+const moon = "/moon-white.png"
 
-    return (
-        <>
-             <button
-      onClick={() => dispatch(toggleTheme())}
-      className="px-4 py-2 rounded"
-      style={{
-        backgroundColor: isDarkMode ? '#333' : '#eee',
-        color: isDarkMode ? '#fff' : '#000',
-      }}
-    >
-      Toggle Theme
-    </button>
-        </>
+const [isOpen, setIsOpen] = useState(false);
+const toggleSwitch = ()=> setIsOpen(!isOpen)
+
+    const dispatch = useDispatch();
+
+return (
+    <>
+    <motion.div className={`w-24 p-2 h-12 rounded-full select-none cursor-pointer flex border ${isOpen ? 'justify-start bg-white' : 'justify-end bg-black'}`} 
+                layout
+                transition={{
+                            type: "spring",
+                            duration: 0.8,
+                            bounce: 1.0,
+                            }}
+                onClick={() => {
+                        toggleSwitch();
+                        dispatch(toggleTheme())
+                    }}>
+        <motion.div 
+            layout
+            transition={{
+                        type: "spring",
+                        duration: 0.8,
+                        bounce: 0.5,
+                        }}
+            className="w-8 h-8 rounded-full flex justify-center" >
+                
+                <img 
+                alt ="theme"
+                className='w-8 h-8'
+                src= {isOpen ? sun : moon }/>
+                
+        </motion.div>
+                    
+    </motion.div>
+
+</>
     )
 }
 
